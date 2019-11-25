@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./weather.css";
+import "./Weather.css";
 
 export default function Weather() {
   function handleSubmit(event) {
