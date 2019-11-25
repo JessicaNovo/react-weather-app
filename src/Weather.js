@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
-import "./Weather.css";
+import "./weather.css";
 
 export default function Weather() {
   function handleSubmit(event) {
@@ -30,17 +29,26 @@ export default function Weather() {
   const [weather, setWeather] = useState({});
   const [load, setLoad] = useState(false);
 
+  let search = (
+    <form onSubmit={handleSubmit}>
+      <input type="search" placeholder="Enter a city..." onChange={getCity} />
+      <input type="submit" value="Search" />
+    </form>
+  );
+
+  let footer = (
+    <p className="code">
+      <a href="https://github.com/JessicaNovo/react-weather-app" target="/">
+        Open-source code
+      </a>{" "}
+      by Jéssica Novo
+    </p>
+  );
+
   if (load) {
     return (
       <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="search"
-            placeholder="Enter a city..."
-            onChange={getCity}
-          />
-          <input type="submit" value="Search" />
-        </form>
+        {search}
         <h1>{city}</h1>
         <img src={weather.icon} alt="" />
         <ul>
@@ -49,14 +57,15 @@ export default function Weather() {
           <li>Humidity: {Math.round(weather.humidity)}%</li>
           <li>Wind: {Math.round(weather.wind)} km/h</li>
         </ul>
+        {footer}
       </div>
     );
   } else {
     return (
-      <form onSubmit={handleSubmit}>
-        <input type="search" placeholder="Enter a city..." onChange={getCity} />
-        <input type="submit" value="Search" />
-      </form>
+      <div>
+        {search}
+        {footer}
+      </div>
     );
   }
 }
